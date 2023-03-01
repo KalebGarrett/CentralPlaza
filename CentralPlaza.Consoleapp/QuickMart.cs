@@ -10,7 +10,7 @@ namespace CentralPlaza.Consoleapp
 
         public record QuickMartOrder(QuickMartCatalogue Item, int Quantity);
 
-        public List<TechGeekCatalogue> QuickMartProducts = new List<TechGeekCatalogue>
+        public List<QuickMartCatalogue> QuickMartProducts = new List<QuickMartCatalogue>
         {
             new("Eggs", 7.00),
             new("Milk", 6.00),
@@ -28,7 +28,7 @@ namespace CentralPlaza.Consoleapp
             Console.WriteLine("Welcome to Quick Mart!");
         }
 
-        public override void PrintCatalogue(List<TechGeekCatalogue> quickMartCatalogue)
+        public void PrintCatalogueQuickMart(List<QuickMartCatalogue> quickMartCatalogue)
         {
             Console.WriteLine("What are you interested in buying?");
             for (int i = 0; i < quickMartCatalogue.Count; i++)
@@ -39,7 +39,7 @@ namespace CentralPlaza.Consoleapp
             Console.WriteLine();
         }
 
-        public override TechGeekCatalogue InputProduct(List<TechGeekCatalogue> quickMartCatalogue)
+        public QuickMartCatalogue InputProductQuickMart(List<QuickMartCatalogue> quickMartCatalogue)
         {
             while (true)
             {
@@ -64,29 +64,30 @@ namespace CentralPlaza.Consoleapp
             }
         }
 
-        public override void PrintSubTotal(List<TechGeekOrder> quickMartOrders)
+        public void PrintSubTotalQuickMart(List<QuickMartOrder> quickMartOrders)
         {
-            Console.WriteLine($"Your Subtotal: ${QuickMartOrders.Sum(o => o.Item.Price * o.Quantity)}\n");
+            Console.WriteLine($"Your Subtotal: ${quickMartOrders.Sum(o => o.Item.Price * o.Quantity)}\n");
         }
-        
+
         public override bool CheckIfContinue()
         {
             Console.Write("Would you like anything else from Quick Mart? Y/N: ");
             return Console.ReadLine()?.Trim().ToUpper() == "Y";
         }
 
-        public override void PrintGrandTotal(List<TechGeekOrder> quickMartOrders)
+        public void PrintGrandTotalQuickMart(List<QuickMartOrder> quickMartOrders)
         {
             Console.WriteLine();
             foreach (var order in quickMartOrders)
             {
-                Console.WriteLine($"{order.Item.Product, -10} x{order.Quantity, -4}: ${order.Item.Price * order.Quantity}");
+                Console.WriteLine(
+                    $"{order.Item.Product,-10} x{order.Quantity,-4}: ${order.Item.Price * order.Quantity}");
             }
 
             Console.WriteLine("**********************************");
             Console.WriteLine($"Your Grand Total: ${quickMartOrders.Sum(o => o.Item.Price * o.Quantity)}\n");
         }
-        
+
         public override void ByeBye()
         {
             Console.WriteLine("Thank you for shopping at Quick Mart!");

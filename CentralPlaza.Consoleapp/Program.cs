@@ -38,16 +38,18 @@ namespace CentralPlaza.Consoleapp
                         do
                         {
                             quickMart.Greeting();
-                            quickMart.PrintCatalogue(quickMart.QuickMartProducts);
-                            var item = quickMart.InputProduct(quickMart.QuickMartProducts);
-                            var quantity = techGeek.InputQuantity();
+                            quickMart.PrintCatalogueQuickMart(quickMart.QuickMartProducts);
+                            var item = quickMart.InputProductQuickMart(quickMart.QuickMartProducts);
+                            var quantity = quickMart.InputQuantity();
                             quickMart.QuickMartOrders.Add(new QuickMart.QuickMartOrder(item, quantity));
+                            quickMart.PrintSubTotalQuickMart(quickMart.QuickMartOrders);
                         } while (quickMart.CheckIfContinue());
-                        quickMart.PrintGrandTotal(quickMart.QuickMartOrders);
+
+                        quickMart.PrintGrandTotalQuickMart(quickMart.QuickMartOrders);
                         quickMart.ByeBye();
                         break;
                     default:
-                        Console.WriteLine("That is not a valid command");
+                        Console.WriteLine("That is not a valid command.");
                         break;
                 }
             }

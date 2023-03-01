@@ -4,9 +4,10 @@ using System.Linq;
 
 namespace CentralPlaza.Consoleapp
 {
-    public class TechGeek 
+    public class TechGeek
     {
         public record TechGeekCatalogue(string Product, double Price);
+
         public record TechGeekOrder(TechGeekCatalogue Item, int Quantity);
 
         public List<TechGeekCatalogue> TechProducts = new List<TechGeekCatalogue>
@@ -26,7 +27,7 @@ namespace CentralPlaza.Consoleapp
             Console.WriteLine("Welcome to Tech Geek!");
         }
 
-        public virtual void PrintCatalogue(List<TechGeekCatalogue> techGeekCatalogue)
+        public void PrintCatalogue(List<TechGeekCatalogue> techGeekCatalogue)
         {
             Console.WriteLine("What are you interested in buying?");
             for (int i = 0; i < techGeekCatalogue.Count; i++)
@@ -37,7 +38,7 @@ namespace CentralPlaza.Consoleapp
             Console.WriteLine();
         }
 
-        public virtual TechGeekCatalogue InputProduct(List<TechGeekCatalogue> techGeekCatalogue)
+        public TechGeekCatalogue InputProduct(List<TechGeekCatalogue> techGeekCatalogue)
         {
             while (true)
             {
@@ -62,9 +63,9 @@ namespace CentralPlaza.Consoleapp
             }
         }
 
-        public virtual void PrintSubTotal(List<TechGeekOrder> techGeekOrders)
+        public void PrintSubTotal(List<TechGeekOrder> techGeekOrders)
         {
-            Console.WriteLine($"Your Subtotal: ${TechOrders.Sum(o => o.Item.Price * o.Quantity)}\n");
+            Console.WriteLine($"Your Subtotal: ${techGeekOrders.Sum(o => o.Item.Price * o.Quantity)}\n");
         }
 
         public virtual bool CheckIfContinue()
@@ -73,12 +74,13 @@ namespace CentralPlaza.Consoleapp
             return Console.ReadLine()?.Trim().ToUpper() == "Y";
         }
 
-        public virtual void PrintGrandTotal(List<TechGeekOrder> techGeekOrders)
+        public void PrintGrandTotal(List<TechGeekOrder> techGeekOrders)
         {
             Console.WriteLine();
             foreach (var order in techGeekOrders)
             {
-                Console.WriteLine($"{order.Item.Product, -10} x{order.Quantity, -4}: ${order.Item.Price * order.Quantity}");
+                Console.WriteLine(
+                    $"{order.Item.Product,-10} x{order.Quantity,-4}: ${order.Item.Price * order.Quantity}");
             }
 
             Console.WriteLine("**********************************");
@@ -89,6 +91,11 @@ namespace CentralPlaza.Consoleapp
         {
             Console.WriteLine("Thank you for shopping at Quick Mart!");
             Console.WriteLine();
+        }
+
+        public virtual QuickMart.QuickMartCatalogue InputProduct(List<QuickMart.QuickMartCatalogue> quickMartCatalogue)
+        {
+            throw new NotImplementedException();
         }
     }
 }
