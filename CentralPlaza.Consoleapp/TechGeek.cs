@@ -92,10 +92,5 @@ namespace CentralPlaza.Consoleapp
             Console.WriteLine("Thank you for shopping at Quick Mart!");
             Console.WriteLine();
         }
-
-        public virtual QuickMart.QuickMartCatalogue InputProduct(List<QuickMart.QuickMartCatalogue> quickMartCatalogue)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
