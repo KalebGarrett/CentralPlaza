@@ -89,7 +89,7 @@ namespace CentralPlaza.Consoleapp
 
         public virtual void ByeBye()
         {
-            Console.WriteLine("Thank you for shopping at Quick Mart!");
+            Console.WriteLine("Thank you for shopping at Tech Geek!");
             Console.WriteLine();
         }
     }
