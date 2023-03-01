@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CentralPlaza.Consoleapp
 {
-    public class TechGeek : CentralPlaza
+    public class TechGeek 
     {
         public record TechGeekCatalogue(string Product, double Price);
-
         public record TechGeekOrder(TechGeekCatalogue Item, int Quantity);
 
-        public List<TechGeekCatalogue> TechCatalogue = new List<TechGeekCatalogue>()
+        public List<TechGeekCatalogue> TechProducts = new List<TechGeekCatalogue>
         {
             new("Phone", 500.00),
             new("Laptop", 1000.00),
@@ -18,40 +18,76 @@ namespace CentralPlaza.Consoleapp
             new("OLED Television", 1800.00),
         };
 
-        public List<TechGeekOrder> Orders = new List<TechGeekOrder>();
+        public List<TechGeekOrder> TechOrders = new List<TechGeekOrder>();
 
-        public override void Greeting()
+        public virtual void Greeting()
         {
+            Console.WriteLine();
             Console.WriteLine("Welcome to Tech Geek!");
         }
 
-        public void PrintCatalog(List<TechGeekCatalogue> TechCatalogue)
+        public virtual void PrintCatalogue(List<TechGeekCatalogue> techGeekCatalogue)
         {
             Console.WriteLine("What are you interested in buying?");
-            for (int i = 0; i < TechCatalogue.Count; i++)
+            for (int i = 0; i < techGeekCatalogue.Count; i++)
             {
-                Console.Write("");
+                Console.Write($"{i + 1}: {techGeekCatalogue[i].Product} (${techGeekCatalogue[i].Price})\n");
             }
 
-            Console.WriteLine("**********************");
+            Console.WriteLine();
         }
 
-        public TechGeekCatalogue InputItem(List<TechGeekCatalogue> TechCatalogue)
+        public virtual TechGeekCatalogue InputProduct(List<TechGeekCatalogue> techGeekCatalogue)
         {
             while (true)
             {
-                Console.Write("Enter option 1, 2 , 3, 4, or 5");
+                Console.Write("Enter options: 1, 2, 3, 4, or 5: ");
+                if (int.TryParse(Console.ReadLine(), out int i) && i > 0 && i <= techGeekCatalogue.Count)
+                {
+                    Console.WriteLine($"You have picked: {techGeekCatalogue[i - 1].Product}\n");
+                    return techGeekCatalogue[i - 1];
+                }
             }
         }
 
-        public override bool CheckIfContinue()
+        public virtual int InputQuantity()
+        {
+            while (true)
+            {
+                Console.Write("Enter quantity: ");
+                if (int.TryParse(Console.ReadLine(), out int i) && i > 0)
+                {
+                    return i;
+                }
+            }
+        }
+
+        public virtual void PrintSubTotal(List<TechGeekOrder> techGeekOrders)
+        {
+            Console.WriteLine($"Your Subtotal: ${TechOrders.Sum(o => o.Item.Price * o.Quantity)}\n");
+        }
+
+        public virtual bool CheckIfContinue()
         {
             Console.Write("Would you like anything else from Tech Geek? Y/N: ");
             return Console.ReadLine()?.Trim().ToUpper() == "Y";
         }
 
-        public override void ByeBye()
+        public virtual void PrintGrandTotal(List<TechGeekOrder> techGeekOrders)
         {
+            Console.WriteLine();
+            foreach (var order in techGeekOrders)
+            {
+                Console.WriteLine($"{order.Item.Product, -10} x{order.Quantity, -4}: ${order.Item.Price * order.Quantity}");
+            }
+
+            Console.WriteLine("**********************************");
+            Console.WriteLine($"Your Grand Total: ${techGeekOrders.Sum(o => o.Item.Price * o.Quantity)}\n");
+        }
+
+        public virtual void ByeBye()
+        {
+            Console.WriteLine("Thank you for shopping at Quick Mart!");
             Console.WriteLine();
         }
     }

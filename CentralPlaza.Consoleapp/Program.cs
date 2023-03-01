@@ -2,37 +2,55 @@
 
 namespace CentralPlaza.Consoleapp
 {
-    class Program
+    internal static class Program
     {
         static void Main(string[] args)
         {
-            CentralPlaza store = new CentralPlaza(true);
+            CentralPlaza plaza = new CentralPlaza(true);
             TechGeek techGeek = new TechGeek();
             QuickMart quickMart = new QuickMart();
 
-            store.Greeting();
-
-            while (store.AppRunning)
+            while (plaza.AppRunning)
             {
-                Console.Write("\"E\" for Exit, \"T\" for Tech Geek, and \"Q\" for Quick Mart: ");
-                store.Command = Console.ReadLine()?.ToUpper();
+                Console.Write("Commands: \'-Exit\', \'-Tech Geek\', \'-Quick Mart\': ");
+                plaza.Command = Console.ReadLine();
 
-                switch (store.Command)
+                switch (plaza.Command)
                 {
-                    case "E":
-                        store.AppRunning = false;
+                    case { } a when a.StartsWith("-Exit"):
+                        plaza.AppRunning = false;
                         break;
-                    case "T":
+                    case { } b when b.StartsWith("-Tech Geek"):
+                        do
+                        {
+                            techGeek.Greeting();
+                            techGeek.PrintCatalogue(techGeek.TechProducts);
+                            var item = techGeek.InputProduct(techGeek.TechProducts);
+                            var quantity = techGeek.InputQuantity();
+                            techGeek.TechOrders.Add(new TechGeek.TechGeekOrder(item, quantity));
+                            techGeek.PrintSubTotal(techGeek.TechOrders);
+                        } while (techGeek.CheckIfContinue());
+
+                        techGeek.PrintGrandTotal(techGeek.TechOrders);
+                        techGeek.ByeBye();
                         break;
-                    case "Q":
+                    case { } c when c.StartsWith("-Quick Mart"):
+                        do
+                        {
+                            quickMart.Greeting();
+                            quickMart.PrintCatalogue(quickMart.QuickMartProducts);
+                            var item = quickMart.InputProduct(quickMart.QuickMartProducts);
+                            var quantity = techGeek.InputQuantity();
+                            quickMart.QuickMartOrders.Add(new QuickMart.QuickMartOrder(item, quantity));
+                        } while (quickMart.CheckIfContinue());
+                        quickMart.PrintGrandTotal(quickMart.QuickMartOrders);
+                        quickMart.ByeBye();
                         break;
                     default:
-                        Console.WriteLine("That is not a valid option");
+                        Console.WriteLine("That is not a valid command");
                         break;
                 }
             }
-
-            store.ByeBye();
         }
     }
 }
