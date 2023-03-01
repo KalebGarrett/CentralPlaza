@@ -6,7 +6,7 @@ namespace CentralPlaza.Consoleapp
     {
         static void Main(string[] args)
         {
-            CentralPlaza plaza = new CentralPlaza(true);
+            Models.CentralPlaza plaza = new Models.CentralPlaza(true);
             TechGeek techGeek = new TechGeek();
             QuickMart quickMart = new QuickMart();
 

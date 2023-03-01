@@ -10,7 +10,7 @@ namespace CentralPlaza.Consoleapp
 
         public record TechGeekOrder(TechGeekCatalogue Item, int Quantity);
 
-        public List<TechGeekCatalogue> TechProducts = new List<TechGeekCatalogue>
+        public List<TechGeekCatalogue> TechProducts { get; set; } = new List<TechGeekCatalogue>
         {
             new("Phone", 500.00),
             new("Laptop", 1000.00),
@@ -19,7 +19,7 @@ namespace CentralPlaza.Consoleapp
             new("OLED Television", 1800.00),
         };
 
-        public List<TechGeekOrder> TechOrders = new List<TechGeekOrder>();
+        public List<TechGeekOrder> TechOrders { get; set; } = new List<TechGeekOrder>();
 
         public virtual void Greeting()
         {

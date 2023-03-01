@@ -1,4 +1,4 @@
-﻿namespace CentralPlaza.Consoleapp
+﻿namespace CentralPlaza.Consoleapp.Models
 {
     public class CentralPlaza
     {

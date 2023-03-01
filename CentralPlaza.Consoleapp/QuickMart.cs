@@ -10,7 +10,7 @@ namespace CentralPlaza.Consoleapp
 
         public record QuickMartOrder(QuickMartCatalogue Item, int Quantity);
 
-        public List<QuickMartCatalogue> QuickMartProducts = new List<QuickMartCatalogue>
+        public List<QuickMartCatalogue> QuickMartProducts { get; set; } = new List<QuickMartCatalogue>
         {
             new("Eggs", 7.00),
             new("Milk", 6.00),
@@ -20,7 +20,7 @@ namespace CentralPlaza.Consoleapp
             new("Pasta", 2.50),
         };
 
-        public List<QuickMartOrder> QuickMartOrders = new List<QuickMartOrder>();
+        public List<QuickMartOrder> QuickMartOrders  { get; set; } = new List<QuickMartOrder>();
 
         public override void Greeting()
         {
